@@ -146,9 +146,10 @@ const styles=StyleSheet.create({
         textAlignVertical:'center',
         textAlign:'center',
       
-     
+        paddingTop:'50%',
+
         
-       minHeight:'160%',
+       minHeight:'145%',
        color:'white',
        fontSize:17
       

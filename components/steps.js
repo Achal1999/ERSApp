@@ -40,23 +40,31 @@ function Logo2()
 function Screen()
 {
     const [buttons,setbuttons]=useState([
-        {id:'1', name:'Retrieve and Protect',backgroundColor:'#a62236'},
-        {id:'2', name:'Safety First',backgroundColor:'#004967'},
-        {id:'3', name:'Salvage Priorities', backgroundColor:'#598599'},
-        {id:'4', name:'Disaster Alert', backgroundColor:'#d98d3a'},
-        {id:'5', name:'Assess Damage', backgroundColor:'#d98d3a'},
-        {id:'6', name:'Documentation', backgroundColor:'#d98d3a'},
-        {id:'7', name:'Stabilization', backgroundColor:'#d98d3a'},
-        {id:'8', name:'Going Offsite', backgroundColor:'#d98d3a'},
-        {id:'9', name:'Building Tips', backgroundColor:'#d98d3a'}
+        {id:'1', name:'Retrieve and Protect',src:require('../assets/1.png')},
+        {id:'2', name:'Safety First',src:require('../assets/2.png')},
+        {id:'3', name:'Salvage Priorities',src:require('../assets/3.png')},
+        {id:'4', name:'Disaster Alert',src:require('../assets/4.png')},
+        {id:'5', name:'Assess Damage',src:require('../assets/5.png')},
+        {id:'6', name:'Documentation',src:require('../assets/6.png')},
+        {id:'7', name:'Stabilization',src:require('../assets/7.png')},
+        {id:'8', name:'Going Offsite',src:require('../assets/8.png')},
+        {id:'9', name:'Building Tips', src:require('../assets/9.png')}
     ])
 
     return(
         <View style={{flex:2}}>   
     
         <FlatList style={styles.flatlist}
-       data={buttons} numColumns={3} renderItem={({item})=><View style={{flex:1, margin:10,justifyContent:'space-between'
-       }}><TouchableOpacity style={{backgroundColor:item.backgroundColor,justifyContent:'center',flex:1}}><Text style={{color:'black',textAlign:'center',fontSize:18,margin:10}}>{item.name}</Text></TouchableOpacity></View>}
+       data={buttons} numColumns={3} renderItem={({item})=>
+       <View style={{flex:1, margin:'6%',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap', flexDirection:'row' }}>
+         <TouchableOpacity style={{justifyContent:'center',flex:1}}>
+           <Image source={item.src} style={{alignContent:'center',justifyContent:'center',width:50,height:50,resizeMode:'contain'}}/>
+           <Text  style={{color:'black',fontSize:'9%',marginTop:15,textAlign:'left'}}>
+            {item.name}
+           </Text>
+       </TouchableOpacity>
+       
+       </View>}
      />
     
      </View>
@@ -129,7 +137,8 @@ const styles=StyleSheet.create({
     },
     flatlist:
     {
-        flex:1   
+        flex:1,
+        
     },
         buttontxt:
       {
@@ -152,9 +161,8 @@ const styles=StyleSheet.create({
         textAlignVertical:'center',
         textAlign:'center',
       
-     
-        
-       minHeight:'160%',
+        paddingTop:'50%',
+       minHeight:'145%',
        color:'white',
        fontSize:17
       
