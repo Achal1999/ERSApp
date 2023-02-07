@@ -17,14 +17,16 @@ function Glossary ({navigation})
     <StatusBar backgroundColor='#616164'/>
 
   <Logo3/>
-   <Screentext/>
+  <Screen navigationObject={navigation}/>
+
   
   </View>
 </View>
 <Navigation navigationObject={navigation}/>
 </SafeAreaView>
-    );
+)
 };
+
 
 function Logo3()
 {
@@ -38,23 +40,35 @@ function Logo3()
     );
 }
 
-function Screentext()
+function Screen({navigationObject})
 {
-  const html = `
-        <h1>This HTML snippet is now rendered with native components !</h1>
-        <h2>Enjoy a webview-free and blazing fast application</h2>
-        <em style="textAlign: center;">Look at how happy this native cat is</em>
-    `;
-  return(
-    <View style={{flex:3}}>
-     <ScrollView >
+    const [buttons,setbuttons]=useState([
+        {id:'1', name:'Glossary', navigate:"Glossary_Content",src:require('../assets/10.png')},
+        
+
+      ])
+
+    return(
+        <View style={{flex:2}}>   
+        
+        <FlatList style={styles.flatlist}
+       data={buttons} numColumns={3} renderItem={({item})=>
+       <View style={{flex:1, margin:'6%',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap', flexDirection:'row' }}>
+         <TouchableOpacity onPress={()=>navigationObject.navigate(item.navigate)} style={{justifyContent:'center',flex:1}}>
+           <Image source={item.src} style={{alignContent:'center',justifyContent:'center',width:'40%',height:'90%',resizeMode:'contain',flexWrap:'wrap'}}/>
+           <Text  style={{color:'black',fontSize:'12%',marginTop:'6%',marginLeft:'11%',textAlign:'left',flexWrap:'wrap'}}>
+            {item.name}
+           </Text>
+       </TouchableOpacity>
        
-               <RenderHtml source={{ html }} />
-       </ScrollView>
-     </View>  
- 
-  );
+       </View>}
+     />
+       
+     </View>
+    );
 }
+
+
 
 
 function Navigation({navigationObject})
