@@ -8,7 +8,7 @@ import RenderHtml from "react-native-render-html";
 
 
 
-function Books ({navigation})
+function General_Content ({navigation})
 {
     return(
 <SafeAreaView style={{flex:1, backgroundColor:'#616164'}}>       
@@ -48,7 +48,7 @@ function BtnLogo()
  <View style={{flexDirection:'row',minHeight:'5%',width:'100%',flex:1,marginTop:'20%'}}>
    <Image source={require('../../assets/10.png')} style={styles.imgs}/>
    <View style={{flex:1.5}}>
-      <Text style={styles.txts}>Books & Paper</Text>
+      <Text style={styles.txts}>General Salvage Techniques</Text>
       </View>
  </View>
     );
@@ -77,12 +77,12 @@ function Navigation({navigationObject})
 
   return(
     <View style={{flexDirection:'row',flex:1,justifyContent:'center',alignItems:'flex-end',maxHeight:'11%'}}>
-        <TouchableOpacity  onPress={()=>navigationObject.navigate("Step")} style={{backgroundColor:'#a62236',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>Step-{"\n"}By-Step{"\n"}Guide</Text></TouchableOpacity>
-        <TouchableOpacity  onPress={()=>navigationObject.navigate("Material")} style={{backgroundColor:'#004967',justifyContent:'center',flex:1}}><Text style={styles.buttontxts}>Material-{"\n"}Specific{"\n"}Salvage</Text></TouchableOpacity>
-      
-        <TouchableOpacity onPress={()=>navigationObject.navigate("General")} style={{backgroundColor:'#d98d3a',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>General{"\n"}Salvage{"\n"}Techniques</Text></TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigationObject.navigate("Glossary")} style={{backgroundColor:'#598599',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>Glossary</Text></TouchableOpacity>
-    </View>
+    <TouchableOpacity  onPress={()=>navigationObject.navigate("Step")} style={{backgroundColor:'#a62236',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>Step-{"\n"}By-Step{"\n"}Guide</Text></TouchableOpacity>
+    <TouchableOpacity  onPress={()=>navigationObject.navigate("Material")} style={{backgroundColor:'#004967',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>Material-{"\n"}Specific{"\n"}Salvage</Text></TouchableOpacity>
+  
+  <TouchableOpacity onPress={()=>navigationObject.navigate("General")} style={{backgroundColor:'#d98d3a',justifyContent:'center',flex:1}}><Text style={styles.buttontxts}>General{"\n"}Salvage{"\n"}Techniques</Text></TouchableOpacity>
+  <TouchableOpacity onPress={()=>navigationObject.navigate("Glossary")} style={{backgroundColor:'#598599',justifyContent:'center',flex:1}}><Text style={styles.buttontxt}>Glossary</Text></TouchableOpacity>
+</View>
 
 
   );
@@ -90,7 +90,7 @@ function Navigation({navigationObject})
 
 
 
-export default Books;
+export default General_Content;
 
 const styles=StyleSheet.create({
    border:

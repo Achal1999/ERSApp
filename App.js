@@ -1,7 +1,7 @@
 // import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet,Text, View,Image, flexWrap,TouchableOpacity,FlatList,ScrollView,SafeAreaView } from 'react-native';
+import { StyleSheet,Text, View,Image, flexWrap,TouchableOpacity,FlatList,ScrollView,SafeAreaView ,Linking,Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
  //import {createStackNavigator} from '@react-navigation/stack';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,23 +10,27 @@ import {NavigationContainer} from '@react-navigation/native';
  import Books from './components/material_buttons/Books';
  import General from './components/General';
  import Glossary from './components/Glossary';
- import resize from './resize'
+ import General_Content from './components/General_buttons/General_Content';
+ import Glossary_Content from './components/Glossary_Button/Glossary_Content';
 
 const Stack=createNativeStackNavigator();
 function App(){
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ERS" screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName="ERS" screenOptions={{headerShown:false }}>
         <Stack.Screen name="ERS" component={Ers} />
-         <Stack.Screen name="Step" component={steps} />
+         <Stack.Screen name="Step" component={steps}   />
  
          <Stack.Screen name="Material" component={material} />
         <Stack.Screen name="General" component={General} />
         <Stack.Screen name="Glossary" component={Glossary} /> 
 
+        <Stack.Screen name="General_Content" component={General_Content} />
+        <Stack.Screen name="Glossary_Content" component={Glossary_Content} />
 
 
-        {/* <Stack.Screen name="Book" component={Books} /> */}
+        <Stack.Screen name="Book" component={Books} />
+        
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -38,8 +42,9 @@ function Ers({navigation}) {
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'#a62236'}}>
     <View style={styles.border}>
-
-        <View style={styles.border2}> 
+       
+        <ScrollView style={styles.border2}> 
+        
         <StatusBar backgroundColor='#a62236'/>
            <Logo/>
            <Heading/>
@@ -47,11 +52,22 @@ function Ers({navigation}) {
            <Footer/>
              
 
-        </View>
+        </ScrollView>
          </View>
     </SafeAreaView>
   );
 }
+
+const OpenDial =()=>
+{
+  if (Platform.OS==="android")
+  {
+    Linking.openURL("tel:+1-2026618068")
+  }
+  else
+  Linking.openURL("telprompt:+1-2026618068")
+}
+
 
 function Logo()
 {
@@ -60,7 +76,7 @@ function Logo()
   <Image source={require('./assets/logoersn.png')} style={styles.img}/>
     <View style={{flexDirection:'column',flex:2}}>
     <Text style={styles.txt}>foundation{"\n"}for advancement{"\n"}in conservation</Text>
-    <Text style={{fontWeight:'bold',flexWrap:'wrap',flex:1,marginTop:'5%',marginLeft:'5%'}}>Protecting Cultural{"\n"}Heritage</Text>
+    <Text style={{fontWeight:'bold',flexWrap:'wrap',flex:1,marginTop:'5%',marginLeft:'5%',marginBottom:'20%'}}>Protecting Cultural{"\n"}Heritage</Text>
   </View>
   </View>
   );
@@ -69,7 +85,7 @@ function Logo()
 function Heading()
 {
   return(
-    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+    <View style={{flex:1,alignItems:'center',justifyContent:'center',marginTop:'2%'}}>
       <Text  style={styles.head}>  EMERGENCY{"\n"}  RESPONSE &{"\n"}SALVAGE GUIDE</Text>
     </View>
   );
@@ -78,7 +94,7 @@ function Heading()
 function Button({navigationObject})
 {
   return(
-    <View style={{flexDirection:'column',flex:2,alignItems:'center',margin:10}}>
+    <View style={{flexDirection:'column',flex:2,alignItems:'center',margin:'3%'}}>
       <View style={{flexDirection:'row', flex:1}}>
         <TouchableOpacity  onPress={()=>navigationObject.navigate("Step")} style={{backgroundColor:'#a62236',justifyContent:'center',flex:1,padding:'5%',margin:'3%'}}><Text style={styles.buttontxt}>Step-{"\n"}By-Step{"\n"}Guide</Text></TouchableOpacity>
         <TouchableOpacity onPress={()=>navigationObject.navigate("Material")} style={{backgroundColor:'#004967',justifyContent:'center',flex:1,padding:'5%',margin:'3%'}}><Text style={styles.buttontxt}>Material-{"\n"}Specific{"\n"}Salvage</Text></TouchableOpacity>
@@ -117,9 +133,16 @@ function Buttons()
 function Footer()
 {
   return(
-     <View style={{flexDirection:'column',flex:1,alignItems:'center'}}>
-       <Text style={{paddingBottom:'5%',fontSize:16,textAlign:'center'}}>© FOUNDATION FOR ADVANCEMENT{"\n"}IN CONSERVATION{"\n"}CREATIVE COMMONS LICENSE X</Text>
-       <TouchableOpacity style={{backgroundColor:'#a62236',width:'70%',alignItems:'center'}} onPress={()=>alert('Call NHR clicked')}><Text style={{color:'white',fontSize:20}}>CALL NHR</Text></TouchableOpacity>
+     <View style={{flexDirection:'column',flex:1,alignItems:'center',marginHorizontal:'7%'}}>
+      <View style={{flexDirection:"row",flex:1,alignItems:'center',marginHorizontal:'2%',justifyContent:'space-evenly'}}> 
+       
+       <TouchableOpacity style={styles.contactbtns} onPress={()=>OpenDial()}><Text style={{color:'white',fontSize:'20%'}}>CALL NHR</Text></TouchableOpacity>
+       <TouchableOpacity style={styles.contactbtns} onPress={()=>{Linking.openURL("mailto:emergencies@culturalheritage.org")}}><Text style={{color:'white',fontSize:'20%'}}>Email</Text></TouchableOpacity>
+
+       </View>
+       <Text style={{marginTop:'5%',paddingBottom:'5%',fontSize:'10%',textAlign:'center'}}>© 2021 The Foundation for Advancement in Conservation. To order printed Emergency
+Response and Salvage Wheels visit http://store.culturalheritage.org. Originally adapted from the
+Environmental Hazards Management Institute’s Environmental Action Wheel™.</Text>
 
      </View>
   );
@@ -179,15 +202,26 @@ const styles = StyleSheet.create({
       },
       buttontxt:
       {
+       
        padding:'2%',
        fontWeight:'bold',
        color:'white',fontSize:17,
        textAlign:'center',
-       margin:5  
+       margin:'2%'  
       },
       flatlist:
       {
         flex:1
+      },
+      contactbtns:
+      {
+        backgroundColor:'#a62236',
+        width:'50%',
+        alignItems:'center',
+        justifyContent:'center',
+        marginHorizontal:'5%',
+        maxWidth:'50%',
+        padding:'1%'
       }
 });
 

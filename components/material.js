@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { StyleSheet, Text, View, Image, FlexDirection, TouchableOpacity, Alert, fontWeight, FlatList, ScrollView  } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import Books from './material_buttons/Books';
 
 function material ({navigation})
 {
@@ -37,33 +37,43 @@ function Logo3()
     );
 }
 
-function Screen({navigationObjectt})
+function Screen({navigationObject})
 {
     const [buttons,setbuttons]=useState([
-        {id:'1', name:'Books',backgroundColor:'#a62236', navigate:"Book"},
-        {id:'2', name:'Ceramics',backgroundColor:'#004967', navigate:"Book"},
-        {id:'3', name:'eRecords', backgroundColor:'#598599', navigate:"Book"},
-        {id:'4', name:'Furniture', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'5', name:'Framed Art', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'6', name:'Metals', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'7', name:'Organics', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'8', name:'Photographs', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'9', name:'Stone', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'10', name:'Natural History', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'11', name:'Techniques', backgroundColor:'#d98d3a', navigate:"Book"},
-        {id:'12', name:'Textiles', backgroundColor:'#d98d3a', navigate:"Book"},
+        {id:'1', name:'Books', navigate:"Book",src:require('../assets/10.png')},
+        {id:'2', name:'Ceramics', navigate:"Book",src:require('../assets/11.png')},
+        {id:'3', name:'eRecords', navigate:"Book",src:require('../assets/12.png')},
+        {id:'4', name:'Furniture', navigate:"Book",src:require('../assets/13.png')},
+        {id:'5', name:'Framed Art', navigate:"Book",src:require('../assets/14.png')},
+        {id:'6', name:'Metals',  navigate:"Book",src:require('../assets/15.png')},
+        {id:'7', name:'Organics',  navigate:"Book",src:require('../assets/17.png')},
+        {id:'8', name:'Photographs',  navigate:"Book",src:require('../assets/18.png')},
+        {id:'9', name:'Stone', navigate:"Book",src:require('../assets/19.png')},
+        {id:'10', name:'Natural History',  navigate:"Book",src:require('../assets/16.png')},
+        {id:'11', name:'Techniques', navigate:"Book",src:require('../assets/7.png')},
+        {id:'12', name:'Textiles',  navigate:"Book",src:require('../assets/20.png')},
 
-
-
-    ])
+      ])
 
     return(
         <View style={{flex:2}}>   
         
         <FlatList style={styles.flatlist}
+       data={buttons} numColumns={3} renderItem={({item})=>
+       <View style={{flex:1, margin:'6%',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap', flexDirection:'row' }}>
+         <TouchableOpacity onPress={()=>navigationObject.navigate(item.navigate)} style={{justifyContent:'center',flex:1}}>
+           <Image source={item.src} style={{alignContent:'center',justifyContent:'center',width:50,height:50,resizeMode:'contain'}}/>
+           <Text  style={{color:'black',fontSize:'9%',marginTop:15,textAlign:'left'}}>
+            {item.name}
+           </Text>
+       </TouchableOpacity>
+       
+       </View>}
+     />
+        {/* <FlatList style={styles.flatlist}
        data={buttons} numColumns={3} renderItem={({item})=><View style={{flex:1, margin:10,justifyContent:'space-between'
        }}><TouchableOpacity onPress={()=>navigationObjectt.navigate("Book")} style={{backgroundColor:item.backgroundColor,justifyContent:'center',flex:1}}><Text style={{color:'black',textAlign:'center',fontSize:18,margin:10}}>{item.name}</Text></TouchableOpacity></View>}
-     />
+     /> */}
      </View>
     );
 }
@@ -158,8 +168,9 @@ const styles=StyleSheet.create({
         textAlign:'center',
       
      
-        
-       minHeight:'160%',
+        paddingTop:'50%',
+
+       minHeight:'145%',
        color:'white',
        fontSize:17
       
